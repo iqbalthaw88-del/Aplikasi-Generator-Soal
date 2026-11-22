@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Asisten Pembuat Soal Profesional - Generator HOTS & Stimulus</title>
+  <title>Asisten Pembuat Soal Profesional - Generator HOTS, Kisi-Kisi & Distribusi</title>
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -87,13 +87,14 @@
     }
 
     /* Markdown styling inside output */
-    .prose-exam h1 { font-size: 1.5rem; font-weight: bold; margin-top: 1rem; margin-bottom: 0.5rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.25rem; }
-    .prose-exam h2 { font-size: 1.25rem; font-weight: bold; margin-top: 1rem; margin-bottom: 0.5rem; color: #1e3a8a; }
-    .prose-exam h3 { font-size: 1.1rem; font-weight: 600; margin-top: 0.75rem; margin-bottom: 0.25rem; }
-    .prose-exam p { margin-bottom: 0.75rem; line-height: 1.6; text-align: justify; }
-    .prose-exam table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
-    .prose-exam th, .prose-exam td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
-    .prose-exam th { background-color: #f8fafc; font-weight: 600; }
+    .prose-exam h1 { font-size: 1.45rem; font-weight: bold; margin-top: 1.25rem; margin-bottom: 0.6rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.3rem; font-family: 'Inter', sans-serif; }
+    .prose-exam h2 { font-size: 1.2rem; font-weight: bold; margin-top: 1.25rem; margin-bottom: 0.6rem; color: #1e3a8a; font-family: 'Inter', sans-serif; border-bottom: 1px solid #cbd5e1; padding-bottom: 0.25rem; }
+    .prose-exam h3 { font-size: 1.05rem; font-weight: 600; margin-top: 0.9rem; margin-bottom: 0.35rem; color: #0f172a; font-family: 'Inter', sans-serif; }
+    .prose-exam p { margin-bottom: 0.75rem; line-height: 1.65; text-align: justify; }
+    .prose-exam table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.88rem; font-family: 'Inter', sans-serif; }
+    .prose-exam th, .prose-exam td { border: 1px solid #94a3b8; padding: 7px 10px; text-align: left; vertical-align: top; }
+    .prose-exam th { background-color: #f1f5f9; font-weight: 700; color: #1e293b; }
+    .prose-exam tr:nth-child(even) td { background-color: #f8fafc; }
     .prose-exam ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 0.75rem; }
     .prose-exam ol { list-style-type: decimal; padding-left: 1.5rem; margin-bottom: 0.75rem; }
     .prose-exam blockquote { border-left: 4px solid #3b82f6; padding-left: 1rem; background-color: #eff6ff; padding-top: 0.5rem; padding-bottom: 0.5rem; margin: 0.75rem 0; font-style: italic; border-radius: 0 4px 4px 0; }
@@ -110,22 +111,23 @@
           <i class="fa-solid fa-file-pen"></i>
         </div>
         <div>
-          <h1 class="font-bold text-lg leading-tight tracking-wide flex items-center gap-2">
+          <h1 class="font-bold text-base sm:text-lg leading-tight tracking-wide flex items-center gap-2">
             Asisten Pembuat Soal Profesional
-            <span class="bg-blue-500/20 text-blue-300 border border-blue-400/30 text-xs px-2 py-0.5 rounded-full font-normal">HOTS & Stimulus</span>
+            <span class="hidden sm:inline-block bg-blue-500/20 text-blue-300 border border-blue-400/30 text-xs px-2 py-0.5 rounded-full font-normal">HOTS & Kisi-Kisi</span>
           </h1>
-          <p class="text-xs text-slate-400">Generator Instrumen Penilaian Standar Kurikulum & Asesmen Nasional</p>
+          <p class="text-xs text-slate-400 hidden sm:block">Generator Soal, Kunci, Kisi-Kisi & Distribusi Standar Kurikulum</p>
         </div>
       </div>
       
       <!-- Right Actions Header -->
-      <div class="flex items-center space-x-3">
-        <button onclick="openApiKeyModal()" id="apiKeyStatusBtn" class="text-xs px-3 py-1.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition flex items-center gap-2">
-          <i class="fa-solid fa-key text-amber-400"></i>
-          <span id="apiKeyStatusText">Gemini API Key</span>
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <button onclick="openApiKeyModal()" id="apiKeyStatusBtn" class="text-xs px-3 py-1.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center gap-2" title="Pengaturan Multi-AI Otomatis (Gemini, ChatGPT, Groq, OpenRouter, dll)">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <i class="fa-solid fa-robot text-amber-400"></i>
+          <span id="apiKeyStatusText">AI: Otomatis</span>
         </button>
         <button onclick="loadSamplePreset()" class="text-xs px-3 py-1.5 rounded-md bg-emerald-600 hover:bg-emerald-500 text-white font-medium transition flex items-center gap-1.5 shadow">
-          <i class="fa-solid fa-wand-magic-sparkles"></i> Contoh Preset
+          <i class="fa-solid fa-wand-magic-sparkles"></i> <span class="hidden sm:inline">Contoh Preset</span>
         </button>
       </div>
     </div>
@@ -151,13 +153,13 @@
           <!-- Mata Pelajaran & Kelas -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">Mata Pelajaran <span class="text-rose-500">*</span></label>
-              <input type="text" id="mapel" placeholder="Contoh: Biologi, Ekonomi, Sejarah" 
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Mata Pelajaran / Subtes <span class="text-rose-500">*</span></label>
+              <input type="text" id="mapel" placeholder="Contoh: Biologi, Ekonomi, Penalaran Umum" 
                 class="w-full text-xs rounded-lg border-slate-300 border p-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" value="Biologi">
             </div>
             <div>
               <label class="block text-xs font-semibold text-slate-700 mb-1">Kelas / Jenjang <span class="text-rose-500">*</span></label>
-              <input type="text" id="kelas" placeholder="Contoh: Kelas XI / Fase F, Perguruan Tinggi" 
+              <input type="text" id="kelas" placeholder="Contoh: Kelas XI / Fase F, Kelas XII" 
                 class="w-full text-xs rounded-lg border-slate-300 border p-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" value="Kelas XI / Fase F">
             </div>
           </div>
@@ -169,20 +171,44 @@
               <select id="kurikulum" class="w-full text-xs rounded-lg border-slate-300 border p-2.5 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
                 <option value="Kurikulum Merdeka" selected>Kurikulum Merdeka</option>
                 <option value="Kurikulum 2013 (K13)">Kurikulum 2013 (K13)</option>
+                <option value="Standar Asesmen Bakat & Minat (Kemendikbud)">Standar ABM Nasional</option>
                 <option value="Cambridge International / IB">Cambridge / IB</option>
                 <option value="Outcome Based Education (OBE) Perguruan Tinggi">OBE Perguruan Tinggi</option>
               </select>
             </div>
             <div>
               <label class="block text-xs font-semibold text-slate-700 mb-1">Jenis Asesmen / Ujian <span class="text-rose-500">*</span></label>
-              <select id="jenisUjian" class="w-full text-xs rounded-lg border-slate-300 border p-2.5 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
-                <option value="Sumatif Akhir Semester (SAS)" selected>Sumatif Akhir Semester (SAS)</option>
+              <select id="jenisUjian" onchange="handleJenisUjianChange()" class="w-full text-xs rounded-lg border-slate-300 border p-2.5 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                <option value="Kuis">Kuis</option>
+                <option value="Ulangan Harian / Formatif">Ulangan Harian / Formatif</option>
+                <option value="ABM (Asesmen Bakat dan Minat)">ABM (Asesmen Bakat dan Minat)</option>
                 <option value="Sumatif Tengah Semester (STS)">Sumatif Tengah Semester (STS)</option>
+                <option value="Sumatif Akhir Semester (SAS)" selected>Sumatif Akhir Semester (SAS)</option>
                 <option value="Asesmen Sumatif Lingkup Materi">Asesmen Lingkup Materi (Bab)</option>
                 <option value="Try Out UTBK / SNBT">Try Out UTBK / SNBT</option>
                 <option value="Asesmen Kompetensi Minimum (AKM)">AKM (Literasi & Numerasi)</option>
+                <option value="Lainnya">Lainnya (Input Manual...)</option>
               </select>
             </div>
+          </div>
+
+          <!-- INPUT MANUAL JENIS UJIAN (Tampil jika pilih Lainnya) -->
+          <div id="jenisUjianManualWrapper" class="hidden bg-blue-50/70 p-3 rounded-lg border border-blue-200 transition-all">
+            <label class="block text-xs font-semibold text-blue-900 mb-1">
+              <i class="fa-solid fa-pen-to-square mr-1"></i> Tulis Jenis Asesmen / Ujian Manual <span class="text-rose-500">*</span>
+            </label>
+            <input type="text" id="jenisUjianManual" placeholder="Misal: Ujian Sekolah (US), Olimpiade Sains, Pre-Test Diagnostik, Tes Masuk..." 
+              class="w-full text-xs rounded-lg border-blue-300 bg-white border p-2.5 focus:ring-2 focus:ring-blue-500 outline-none transition">
+          </div>
+
+          <!-- INFO KHUSUS ABM (Tampil jika pilih ABM) -->
+          <div id="abmInfoBanner" class="hidden bg-indigo-50 p-3 rounded-lg border border-indigo-200 text-xs text-indigo-900">
+            <div class="font-semibold flex items-center gap-1.5 mb-1">
+              <i class="fa-solid fa-compass text-indigo-600"></i> Mode Asesmen Bakat dan Minat (ABM) Aktif
+            </div>
+            <p class="text-[11px] text-indigo-700 leading-relaxed">
+              Soal akan dirancang mengukur potensi kognitif & bakat spesifik (Verbal, Kuantitatif, Penalaran Logis, Figural/Spasial, Mekanikal, atau Klerikal) tanpa bergantung pada hafalan kurikulum semata.
+            </p>
           </div>
 
           <!-- Options Length (Pilihan Ganda) -->
@@ -202,7 +228,7 @@
 
           <!-- Bab / Materi Pokok -->
           <div>
-            <label class="block text-xs font-semibold text-slate-700 mb-1">Bab / Materi Pokok <span class="text-rose-500">*</span></label>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Bab / Materi Pokok / Subtes <span class="text-rose-500">*</span></label>
             <input type="text" id="materi" placeholder="Contoh: Sistem Reproduksi Manusia & Bioteknologi Modern" 
               class="w-full text-xs rounded-lg border-slate-300 border p-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" value="Sistem Organ & Transpor Membran Sel">
           </div>
@@ -215,7 +241,7 @@
           </div>
 
           <!-- DISTRIBUSI RAGAM SOAL (10 Jenis) -->
-          <div class="pt-2">
+          <div class="pt-1">
             <div class="flex items-center justify-between mb-2">
               <label class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
                 <i class="fa-solid fa-list-check text-blue-600"></i> Komposisi Ragam Soal
@@ -224,9 +250,8 @@
             </div>
 
             <!-- List 10 Soal Steppers -->
-            <div class="space-y-1.5 bg-slate-50 p-3 rounded-lg border border-slate-200 max-h-64 overflow-y-auto">
+            <div class="space-y-1.5 bg-slate-50 p-3 rounded-lg border border-slate-200 max-h-60 overflow-y-auto">
               
-              <!-- Stepper Item Macro -->
               <div class="flex items-center justify-between py-1 px-2 hover:bg-white rounded transition border border-transparent hover:border-slate-200">
                 <span class="text-xs text-slate-700 font-medium">1. PG Biasa</span>
                 <div class="flex items-center space-x-2">
@@ -324,7 +349,7 @@
           <button id="btnGenerate" onclick="generateExam()" 
             class="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl shadow-lg shadow-blue-600/30 transition duration-200 flex items-center justify-center gap-2">
             <i class="fa-solid fa-sparkles"></i>
-            <span>Buat Instrumen Soal HOTS</span>
+            <span>Buat Soal, Kunci, Kisi-Kisi & Distribusi</span>
           </button>
         </div>
       </div>
@@ -335,31 +360,46 @@
     <section class="lg:col-span-7 flex flex-col space-y-4 print-container">
       
       <!-- TOOLBAR ACTIONS (TOP OF PREVIEW) -->
-      <div class="bg-white rounded-xl border border-slate-200 p-3 flex flex-wrap items-center justify-between gap-3 shadow-sm no-print">
-        <!-- Tabs Nav -->
-        <div class="flex items-center bg-slate-100 p-1 rounded-lg">
-          <button onclick="switchTab('tab1')" id="btnTab1" class="px-3 py-1.5 text-xs font-semibold rounded-md transition text-blue-700 bg-white shadow-sm">
-            <i class="fa-solid fa-file-lines mr-1"></i> Naskah Soal (Bagian 1)
+      <div class="bg-white rounded-xl border border-slate-200 p-3 space-y-2.5 shadow-sm no-print">
+        <!-- Row 1: Tabs Nav -->
+        <div class="flex flex-wrap items-center gap-1 bg-slate-100 p-1 rounded-lg">
+          <button onclick="switchTab('tab1')" id="btnTab1" class="px-2.5 py-1.5 text-xs font-semibold rounded-md transition text-blue-700 bg-white shadow-sm">
+            <i class="fa-solid fa-file-lines mr-1"></i> Naskah Soal
           </button>
-          <button onclick="switchTab('tab2')" id="btnTab2" class="px-3 py-1.5 text-xs font-semibold rounded-md transition text-slate-600 hover:text-slate-900">
-            <i class="fa-solid fa-key mr-1"></i> Kunci & Pembahasan (Bagian 2)
+          <button onclick="switchTab('tab2')" id="btnTab2" class="px-2.5 py-1.5 text-xs font-semibold rounded-md transition text-slate-600 hover:text-slate-900">
+            <i class="fa-solid fa-key mr-1"></i> Kunci & Pembahasan
           </button>
-          <button onclick="switchTab('tab3')" id="btnTab3" class="px-3 py-1.5 text-xs font-semibold rounded-md transition text-slate-600 hover:text-slate-900">
-            <i class="fa-solid fa-layer-group mr-1"></i> Lengkap (1 & 2)
+          <button onclick="switchTab('tab3')" id="btnTab3" class="px-2.5 py-1.5 text-xs font-semibold rounded-md transition text-slate-600 hover:text-slate-900">
+            <i class="fa-solid fa-table-list mr-1"></i> Kisi-Kisi Soal
+          </button>
+          <button onclick="switchTab('tab4')" id="btnTab4" class="px-2.5 py-1.5 text-xs font-semibold rounded-md transition text-slate-600 hover:text-slate-900">
+            <i class="fa-solid fa-chart-pie mr-1"></i> Distribusi Soal
+          </button>
+          <button onclick="switchTab('tab5')" id="btnTab5" class="px-2.5 py-1.5 text-xs font-semibold rounded-md transition text-slate-600 hover:text-slate-900">
+            <i class="fa-solid fa-layer-group mr-1"></i> Lengkap
           </button>
         </div>
 
-        <!-- Export Buttons -->
-        <div class="flex items-center space-x-2">
-          <button onclick="exportWord()" id="btnExportWord" disabled class="px-3 py-1.5 bg-slate-100 text-slate-400 text-xs font-medium rounded-lg border border-slate-200 transition flex items-center gap-1.5 cursor-not-allowed">
-            <i class="fa-solid fa-file-word text-blue-600"></i> Unduh Word
-          </button>
-          <button onclick="triggerPrint()" id="btnPrint" disabled class="px-3 py-1.5 bg-slate-100 text-slate-400 text-xs font-medium rounded-lg border border-slate-200 transition flex items-center gap-1.5 cursor-not-allowed">
-            <i class="fa-solid fa-print text-slate-700"></i> Cetak / PDF
-          </button>
-          <button onclick="copyContent()" id="btnCopy" disabled class="px-3 py-1.5 bg-slate-100 text-slate-400 text-xs font-medium rounded-lg border border-slate-200 transition flex items-center gap-1.5 cursor-not-allowed">
-            <i class="fa-regular fa-copy"></i> Salin
-          </button>
+        <!-- Row 2: Export Buttons -->
+        <div class="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-slate-100">
+          <span class="text-[11px] font-medium text-slate-500">Ekspor Dokumen:</span>
+          <div class="flex flex-wrap items-center gap-1.5">
+            <button onclick="exportWord('naskah')" id="btnExportWord" disabled class="px-2.5 py-1.5 bg-slate-100 text-slate-400 text-xs font-medium rounded-lg border border-slate-200 transition flex items-center gap-1.5 cursor-not-allowed" title="Unduh Naskah Soal & Kunci ke Word">
+              <i class="fa-solid fa-file-word text-blue-600"></i> Naskah (.doc)
+            </button>
+            <button onclick="exportWord('kisikisi')" id="btnExportKisiWord" disabled class="px-2.5 py-1.5 bg-slate-100 text-slate-400 text-xs font-medium rounded-lg border border-slate-200 transition flex items-center gap-1.5 cursor-not-allowed" title="Unduh File Kisi-Kisi & Distribusi Soal ke Word">
+              <i class="fa-solid fa-table-cells text-indigo-600"></i> Kisi-Kisi & Distribusi (.doc)
+            </button>
+            <button onclick="exportExcelKisiKisi()" id="btnExportKisiExcel" disabled class="px-2.5 py-1.5 bg-slate-100 text-slate-400 text-xs font-medium rounded-lg border border-slate-200 transition flex items-center gap-1.5 cursor-not-allowed" title="Unduh File Kisi-Kisi & Distribusi Soal ke Excel">
+              <i class="fa-solid fa-file-excel text-emerald-600"></i> Kisi-Kisi (.xls)
+            </button>
+            <button onclick="triggerPrint()" id="btnPrint" disabled class="px-2.5 py-1.5 bg-slate-100 text-slate-400 text-xs font-medium rounded-lg border border-slate-200 transition flex items-center gap-1.5 cursor-not-allowed">
+              <i class="fa-solid fa-print text-slate-700"></i> Cetak / PDF
+            </button>
+            <button onclick="copyContent()" id="btnCopy" disabled class="px-2.5 py-1.5 bg-slate-100 text-slate-400 text-xs font-medium rounded-lg border border-slate-200 transition flex items-center gap-1.5 cursor-not-allowed">
+              <i class="fa-regular fa-copy"></i> Salin
+            </button>
+          </div>
         </div>
       </div>
 
@@ -367,35 +407,40 @@
       <div class="bg-white rounded-xl border border-slate-200 shadow-sm flex-1 p-6 sm:p-10 relative overflow-y-auto min-h-[580px] print-container" id="printableArea">
         
         <!-- INITIAL EMPTY STATE -->
-        <div id="emptyState" class="h-full flex flex-col items-center justify-center text-center py-16 px-4">
+        <div id="emptyState" class="h-full flex flex-col items-center justify-center text-center py-14 px-4">
           <div class="w-16 h-16 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-2xl mb-4 border border-blue-100">
             <i class="fa-solid fa-pen-ruler"></i>
           </div>
-          <h3 class="font-bold text-slate-800 text-lg mb-1">Siap Membuat Soal Ujian</h3>
+          <h3 class="font-bold text-slate-800 text-lg mb-1">Siap Membuat Perangkat Ujian Lengkap</h3>
           <p class="text-xs text-slate-500 max-w-md mb-6 leading-relaxed">
-            Pilih parameter mata pelajaran, kurikulum, dan distribusi ragam soal di panel kiri, lalu klik 
-            <strong class="text-blue-600">"Buat Instrumen Soal HOTS"</strong> untuk menghasilkan stimulus & naskah ujian standar akademis.
+            Pilih parameter mata pelajaran, jenis asesmen (Kuis, Ulangan, ABM, SAS, atau Manual), dan komposisi soal di panel kiri, lalu klik tombol generate.
           </p>
 
           <!-- Feature Highlights Badge Cards -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-lg text-left">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-lg text-left">
             <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-              <div class="text-blue-600 text-sm mb-1 font-semibold flex items-center gap-1.5">
-                <i class="fa-solid fa-brain"></i> HOTS & Stimulus
+              <div class="text-blue-600 text-xs mb-1 font-semibold flex items-center gap-1.5">
+                <i class="fa-solid fa-brain"></i> Soal HOTS & Stimulus
               </div>
-              <p class="text-[11px] text-slate-500">Studi kasus, data tabel, narasi ilmiah & diagram visual kontekstual.</p>
+              <p class="text-[11px] text-slate-500">Naskah soal dilengkapi studi kasus, tabel data & pembahasan pengecoh.</p>
             </div>
             <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-              <div class="text-emerald-600 text-sm mb-1 font-semibold flex items-center gap-1.5">
-                <i class="fa-solid fa-shapes"></i> 10 Ragam Soal
+              <div class="text-indigo-600 text-xs mb-1 font-semibold flex items-center gap-1.5">
+                <i class="fa-solid fa-table-list"></i> Kisi-Kisi & Distribusi Soal
               </div>
-              <p class="text-[11px] text-slate-500">Mendukung PG, PGK, Menjodohkan, Esai, Sebab-Akibat, dll.</p>
+              <p class="text-[11px] text-slate-500">Otomatis menyusun matriks indikator soal & rekapitulasi sebaran kognitif (Word/Excel).</p>
             </div>
             <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-              <div class="text-purple-600 text-sm mb-1 font-semibold flex items-center gap-1.5">
-                <i class="fa-solid fa-shield-check"></i> Rubrik Lengkap
+              <div class="text-emerald-600 text-xs mb-1 font-semibold flex items-center gap-1.5">
+                <i class="fa-solid fa-compass"></i> Kuis, Ulangan, ABM & Manual
               </div>
-              <p class="text-[11px] text-slate-500">Disertai analisis level kognitif (C4-C6) & pembahasan pengecoh.</p>
+              <p class="text-[11px] text-slate-500">Mendukung Asesmen Bakat & Minat (ABM), kuis cepat, ulangan, hingga input mandiri.</p>
+            </div>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
+              <div class="text-amber-600 text-xs mb-1 font-semibold flex items-center gap-1.5">
+                <i class="fa-solid fa-robot"></i> Multi-AI Otomatis
+              </div>
+              <p class="text-[11px] text-slate-500">Deteksi otomatis API Key Gemini, ChatGPT (OpenAI), Groq, OpenRouter, atau mode gratis bawaan.</p>
             </div>
           </div>
         </div>
@@ -405,12 +450,12 @@
           <div class="relative mb-6">
             <div class="w-16 h-16 rounded-full border-4 border-blue-200 border-t-blue-600 animate-spin"></div>
             <div class="absolute inset-0 flex items-center justify-center text-blue-600 font-bold text-xs">
-              HOTS
+              AI
             </div>
           </div>
-          <h4 class="font-bold text-slate-800 text-base mb-1" id="loadingTitle">Sedang Menyusun Stimulus & Soal...</h4>
+          <h4 class="font-bold text-slate-800 text-base mb-1" id="loadingTitle">Sedang Menyusun Naskah, Kisi-Kisi & Distribusi...</h4>
           <p class="text-xs text-slate-500 max-w-sm" id="loadingSubtitle">
-            Gemini AI sedang merancang studi kasus ilmiah dan mendistribusikan soal sesuai kriteria PUEBI.
+            Menghubungkan ke mesin AI otomatis untuk merancang stimulus HOTS, kunci jawaban, kisi-kisi, dan tabel distribusi soal.
           </p>
         </div>
 
@@ -419,20 +464,20 @@
           <!-- Kop Ujian Header (Generated Dynamically) -->
           <div id="kopUjian" class="border-b-4 border-double border-slate-900 pb-4 mb-6">
             <div class="text-center font-bold text-slate-900 tracking-wide uppercase">
-              <h2 id="kopInstitusi" class="text-base sm:text-lg mb-0.5">PEMERINTAH PROVINSI / DEPARTEMEN PENDIDIKAN</h2>
-              <h3 id="kopUjianTitle" class="text-sm sm:text-base text-blue-900">NASKAH ASESMEN SUMATIF HAKIKAT HOTS</h3>
-              <p class="text-xs font-normal normal-case text-slate-600" id="kopKurikulum">Tahun Ajaran 2026/2027 • Kurikulum Merdeka</p>
+              <h2 id="kopInstitusi" class="text-base sm:text-lg mb-0.5 !border-none !m-0 !p-0 !text-slate-900">INSTRUMEN PENILAIAN & PERANGKAT ASESMEN</h2>
+              <h3 id="kopUjianTitle" class="text-sm sm:text-base text-blue-900 !m-0">NASKAH ASESMEN STANDAR HOTS</h3>
+              <p class="text-xs font-normal normal-case text-slate-600 !text-center !mb-0" id="kopKurikulum">Tahun Ajaran 2026/2027 • Kurikulum Merdeka</p>
             </div>
             <div class="mt-4 pt-3 border-t border-slate-300 grid grid-cols-2 text-xs font-sans text-slate-700 leading-relaxed">
               <div>
-                <p><strong>Mata Pelajaran:</strong> <span id="kopMapel">-</span></p>
-                <p><strong>Kelas / Jenjang:</strong> <span id="kopKelas">-</span></p>
-                <p><strong>Materi Pokok:</strong> <span id="kopMateri">-</span></p>
+                <p class="!mb-1 !text-left"><strong>Mata Pelajaran / Subtes:</strong> <span id="kopMapel">-</span></p>
+                <p class="!mb-1 !text-left"><strong>Kelas / Jenjang:</strong> <span id="kopKelas">-</span></p>
+                <p class="!mb-0 !text-left"><strong>Materi Pokok:</strong> <span id="kopMateri">-</span></p>
               </div>
               <div class="text-right">
-                <p><strong>Jenis Ujian:</strong> <span id="kopJenis">-</span></p>
-                <p><strong>Waktu / Alokasi:</strong> 60 - 90 Menit</p>
-                <p><strong>Sifat Ujian:</strong> Utama / Tertulis</p>
+                <p class="!mb-1 !text-right"><strong>Jenis Asesmen:</strong> <span id="kopJenis">-</span></p>
+                <p class="!mb-1 !text-right"><strong>Jumlah Soal:</strong> <span id="kopJumlah">-</span></p>
+                <p class="!mb-0 !text-right"><strong>Sifat Ujian:</strong> Utama / Tertulis</p>
               </div>
             </div>
           </div>
@@ -446,32 +491,75 @@
 
   </main>
 
-  <!-- MODAL API KEY CONFIG -->
+  <!-- MODAL MULTI-AI API KEY AUTO CONFIG -->
   <div id="apiKeyModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-xl shadow-2xl border border-slate-200 max-w-md w-full p-6 space-y-4">
+    <div class="bg-white rounded-xl shadow-2xl border border-slate-200 max-w-lg w-full p-6 space-y-4">
       <div class="flex items-center justify-between border-b border-slate-100 pb-3">
         <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
-          <i class="fa-solid fa-key text-amber-500"></i> Pengaturan Gemini API Key
+          <i class="fa-solid fa-robot text-blue-600"></i> Pengaturan API Key Otomatis (Multi-Provider)
         </h3>
         <button onclick="closeApiKeyModal()" class="text-slate-400 hover:text-slate-600 text-sm">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
       
-      <p class="text-xs text-slate-600 leading-relaxed">
-        Aplikasi ini memanfaatkan model <strong>Gemini 3 Flash</strong>. Secara bawaan, API key runtime akan digunakan otomatis. Jika Anda ingin menggunakan API Key pribadi dari Google AI Studio:
-      </p>
-
-      <div>
-        <label class="block text-xs font-semibold text-slate-700 mb-1">API Key Anda</label>
-        <input type="password" id="inputApiKey" placeholder="AIzaSy..." 
-          class="w-full text-xs rounded-lg border-slate-300 border p-2.5 focus:ring-2 focus:ring-blue-500 outline-none">
+      <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3 text-xs text-emerald-900 leading-relaxed">
+        <strong><i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Deteksi & Routing Otomatis:</strong>
+        Tempelkan API Key dari <strong>Google Gemini</strong> (<code class="bg-white px-1 rounded">AIza...</code>), <strong>OpenAI ChatGPT</strong> (<code class="bg-white px-1 rounded">sk-...</code>), <strong>Groq</strong> (<code class="bg-white px-1 rounded">gsk_...</code>), <strong>OpenRouter</strong> (<code class="bg-white px-1 rounded">sk-or-...</code>), atau <strong>Anthropic Claude</strong> (<code class="bg-white px-1 rounded">sk-ant-...</code>). Sistem akan otomatis mengenali providernya. Jika dikosongkan, sistem otomatis memakai <strong>Mode Gratis Bawaan</strong>.
       </div>
 
-      <div class="flex items-center justify-end space-x-2 pt-2">
-        <button onclick="saveApiKey()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg shadow transition">
-          Simpan Key
+      <div class="space-y-3">
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block text-xs font-semibold text-slate-700">API Key Utama (Gemini / ChatGPT / Groq / OpenRouter / Claude)</label>
+            <span id="detectedProviderBadge" class="text-[11px] font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-600">Auto-Detect</span>
+          </div>
+          <input type="password" id="inputApiKey" oninput="onApiKeyInputChange()" placeholder="Tempel API Key apa saja di sini (AIza... / sk-... / gsk_...)" 
+            class="w-full text-xs rounded-lg border-slate-300 border p-2.5 focus:ring-2 focus:ring-blue-500 outline-none">
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block text-xs font-semibold text-slate-700">API Key Cadangan / Failover <span class="text-slate-400 font-normal">(Opsional)</span></label>
+            <span id="detectedBackupBadge" class="text-[11px] font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-600">Opsional</span>
+          </div>
+          <input type="password" id="inputBackupApiKey" oninput="onApiKeyInputChange()" placeholder="API Key cadangan otomatis dipakai jika key utama limit..." 
+            class="w-full text-xs rounded-lg border-slate-300 border p-2.5 focus:ring-2 focus:ring-blue-500 outline-none">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Mode Pemilihan Engine</label>
+            <select id="providerOverride" class="w-full text-xs rounded-lg border-slate-300 border p-2 bg-white focus:ring-2 focus:ring-blue-500 outline-none">
+              <option value="auto" selected>Otomatis (Deteksi Key + Fallback Gratis)</option>
+              <option value="gemini">Paksa Google Gemini</option>
+              <option value="openai">Paksa OpenAI (ChatGPT)</option>
+              <option value="groq">Paksa Groq (Llama 3.3)</option>
+              <option value="openrouter">Paksa OpenRouter</option>
+              <option value="anthropic">Paksa Anthropic Claude</option>
+              <option value="free_auto">Mode Gratis Tanpa Key (Publik)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Custom Base URL <span class="text-slate-400 font-normal">(Opsional)</span></label>
+            <input type="text" id="customBaseUrl" placeholder="https://api.deepseek.com/v1" 
+              class="w-full text-xs rounded-lg border-slate-300 border p-2 focus:ring-2 focus:ring-blue-500 outline-none">
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+        <button onclick="clearApiKeys()" class="text-xs text-rose-600 hover:underline font-medium">
+          Hapus Key Tersimpan
         </button>
+        <div class="flex items-center space-x-2">
+          <button onclick="closeApiKeyModal()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition">
+            Batal
+          </button>
+          <button onclick="saveApiKey()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg shadow transition">
+            Simpan Pengaturan
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -487,7 +575,10 @@
   <script>
     // App State Management
     let state = {
-      apiKey: localStorage.getItem('gemini_api_key') || '',
+      apiKey: localStorage.getItem('ai_primary_key') || localStorage.getItem('gemini_api_key') || '',
+      backupApiKey: localStorage.getItem('ai_backup_key') || '',
+      providerOverride: localStorage.getItem('ai_provider_override') || 'auto',
+      customBaseUrl: localStorage.getItem('ai_custom_base_url') || '',
       questionCounts: {
         q_pg: 3,
         q_mcma: 1,
@@ -501,16 +592,19 @@
         q_sebab: 0
       },
       rawResponse: '',
-      part1Text: '',
-      part2Text: '',
-      activeTab: 'tab1'
+      part1Text: '', // Naskah Soal
+      part2Text: '', // Kunci & Pembahasan
+      part3Text: '', // Kisi-Kisi Soal
+      part4Text: '', // Distribusi Soal
+      activeTab: 'tab1',
+      lastMeta: null
     };
 
-    // System Instruction as strictly required
-    const SYSTEM_INSTRUCTION = `Anda adalah "Asisten Pembuat Soal Profesional" (Professional Assessment Creator). Tugas utama Anda adalah membantu guru, dosen, dan praktisi pendidikan untuk menyusun instrumen penilaian/soal ujian yang berkualitas tinggi, valid, reliabel, dan objektif.
+    // System Instruction with 4 Mandatory Sections (Naskah, Kunci, Kisi-Kisi, Distribusi)
+    const SYSTEM_INSTRUCTION = `Anda adalah "Asisten Pembuat Soal Profesional" (Professional Assessment Creator). Tugas utama Anda adalah membantu guru, dosen, dan praktisi pendidikan menyusun perangkat instrumen penilaian/soal ujian yang valid, reliabel, objektif, dan terstandar.
 
 Cara Anda Bekerja:
-1. Anda menguasai 10 jenis variasi soal berikut dan siap membuatnya sesuai rincian kuantitas yang diberikan pengguna:
+1. Anda menguasai 10 jenis variasi soal berikut dan wajib membuatnya sesuai rincian kuantitas pengguna:
    - Pilihan Ganda (PG) Biasa
    - PGK MCMA (Pilihan Ganda Kompleks - Multiple Choice Multiple Answer)
    - PGK Kategori Benar/Salah
@@ -522,36 +616,95 @@ Cara Anda Bekerja:
    - Klasifikasi / Kategori
    - Sebab Akibat (Analisis Hubungan)
 
-2. Setiap soal yang Anda buat WAJIB didahului oleh STIMULUS yang kaya (teks narasi ilmiah, studi kasus nyata, data tabel Markdown, atau deskripsi petunjuk visual/diagram dalam tanda kurung siku seperti [Tampilkan grafik batang pertumbuhan populasi...]).
-3. Anda harus berfokus pada soal bertipe HOTS (Higher Order Thinking Skills: C4 Menganalisis, C5 Mengevaluasi, C6 Mencipta), di mana siswa harus menganalisis stimulus untuk menemukan jawaban, bukan sekadar menghafal definisi.
-4. Bahasa yang Anda gunakan harus selalu Bahasa Indonesia baku sesuai PUEBI, efektif, jelas, dan tidak ambigu. Distraktor (pengecoh) pada pilihan ganda harus logis dan homogen.
+2. Setiap soal WAJIB didahului oleh STIMULUS yang kaya (teks narasi ilmiah, studi kasus nyata, data tabel Markdown, atau deskripsi petunjuk visual/diagram dalam tanda kurung siku seperti [Tampilkan grafik batang...]).
+3. Fokus pada soal bertipe HOTS (Higher Order Thinking Skills: C4 Menganalisis, C5 Mengevaluasi, C6 Mencipta), kecuali jika konteks ABM/Kuis membutuhkan variasi MOTS/HOTS yang proporsional. Jika jenis ujian adalah ABM (Asesmen Bakat dan Minat), sesuaikan stimulus untuk mengukur potensi bakat/penalaran (verbal, kuantitatif, logis, figural/spasial, mekanikal, atau klerikal).
+4. Gunakan Bahasa Indonesia baku sesuai PUEBI, efektif, jelas, dan tidak ambigu. Pengecoh (distraktor) harus logis dan homogen.
 
-Format Output yang SELALU Anda Berikan:
-Anda WAJIB membagi output menjadi TEPAT 2 BAGIAN UTAMA dengan pemisah judul heading markdown yang persis seperti berikut:
+FORMAT OUTPUT WAJIB:
+Anda HARUS membagi output menjadi TEPAT 4 BAGIAN UTAMA dengan pemisah heading Markdown H2 yang persis seperti berikut:
 
 ## BAGIAN 1: NASKAH SOAL UJIAN
-(Berisi nomor urut soal, petunjuk pengerjaan, stimulus kontekstual, pertanyaan, tabel data, serta opsi jawaban A-D / A-E TANPA ADA BOCORAN KUNCI JAWABAN SAMA SEKALI).
+(Berisi nomor urut soal, petunjuk pengerjaan, stimulus kontekstual, pertanyaan, tabel data, serta opsi jawaban TANPA BOCORAN KUNCI JAWABAN SAMA SEKALI).
 
 ## BAGIAN 2: KUNCI JAWABAN DAN PEMBAHASAN
-(Berisi tabel/rincian kunci jawaban, bentuk soal, level kognitif seperti C4/C5/C6, rubrik penskoran esai, dan pembahasan mendalam mengapa jawaban tersebut benar serta analisis logis mengapa pengecoh lainnya salah).`;
+(Berisi rincian kunci jawaban setiap nomor, bentuk soal, level kognitif, rubrik penskoran esai, serta pembahasan mendalam mengapa jawaban benar dan analisis mengapa pengecoh lainnya salah).
+
+## BAGIAN 3: KISI-KISI PENULISAN SOAL
+(WAJIB disajikan dalam bentuk TABEL MARKDOWN rapi dengan kolom persis:
+| No. | Capaian / Tujuan Pembelajaran | Materi / Sub-Materi | Indikator Soal | Level Kognitif | Bentuk Soal | Nomor Soal |
+Pastikan setiap nomor soal terpetakan lengkap dari nomor 1 sampai nomor terakhir dengan indikator soal operasional menggunakan kata kerja operasional Bloom seperti Menganalisis, Mengevaluasi, Menyimpulkan, dll.).
+
+## BAGIAN 4: DISTRIBUSI SEBARAN SOAL
+(WAJIB disajikan dalam bentuk 2 TABEL MARKDOWN rekapitulasi yang akurat sesuai jumlah soal yang dibuat:
+1. Tabel Distribusi Berdasarkan Materi & Level Kognitif (Kolom: No. | Materi / Sub-Materi | C1-C2 (LOTS) | C3 (MOTS) | C4 (Analisis) | C5 (Evaluasi) | C6 (Kreasi) | Total Soal | Persentase (%)).
+2. Tabel Distribusi Berdasarkan Bentuk Soal (Kolom: No. | Bentuk Soal | Nomor Soal | Jumlah Soal | Bobot / Persentase (%)).
+Sertakan baris TOTAL di bagian bawah masing-masing tabel).`;
 
     // Initialization
     window.onload = () => {
       updateTotalBadge();
       updateApiKeyUI();
+      handleJenisUjianChange();
     };
+
+    // Detect AI Provider from API Key prefix
+    function detectProviderFromKey(key) {
+      if (!key || !key.trim()) return { id: 'auto_free', name: 'Otomatis (Bawaan / Gratis)' };
+      const k = key.trim();
+      if (k.startsWith('AIza')) return { id: 'gemini', name: 'Google Gemini' };
+      if (k.startsWith('sk-or-')) return { id: 'openrouter', name: 'OpenRouter' };
+      if (k.startsWith('sk-ant-')) return { id: 'anthropic', name: 'Anthropic Claude' };
+      if (k.startsWith('gsk_')) return { id: 'groq', name: 'Groq AI' };
+      if (k.startsWith('xai-')) return { id: 'xai', name: 'xAI Grok' };
+      if (k.startsWith('sk-')) return { id: 'openai', name: 'OpenAI (ChatGPT)' };
+      return { id: 'custom', name: 'Custom OpenAI-Compatible' };
+    }
+
+    function onApiKeyInputChange() {
+      const k1 = document.getElementById('inputApiKey').value;
+      const k2 = document.getElementById('inputBackupApiKey').value;
+      const d1 = detectProviderFromKey(k1);
+      const d2 = detectProviderFromKey(k2);
+
+      const b1 = document.getElementById('detectedProviderBadge');
+      b1.innerText = k1.trim() ? `Terdeteksi: ${d1.name}` : 'Auto-Detect (Mode Gratis)';
+      b1.className = k1.trim()
+        ? 'text-[11px] font-semibold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800'
+        : 'text-[11px] font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-600';
+
+      const b2 = document.getElementById('detectedBackupBadge');
+      b2.innerText = k2.trim() ? `Cadangan: ${d2.name}` : 'Opsional';
+    }
 
     function updateApiKeyUI() {
       const btnText = document.getElementById('apiKeyStatusText');
+      if (state.providerOverride !== 'auto') {
+        const labels = {
+          gemini: 'AI: Gemini',
+          openai: 'AI: ChatGPT',
+          groq: 'AI: Groq',
+          openrouter: 'AI: OpenRouter',
+          anthropic: 'AI: Claude',
+          free_auto: 'AI: Gratis Otomatis'
+        };
+        btnText.innerText = labels[state.providerOverride] || 'AI: Otomatis';
+        return;
+      }
+
       if (state.apiKey) {
-        btnText.innerText = 'Custom Key Active';
+        const det = detectProviderFromKey(state.apiKey);
+        btnText.innerText = `AI: ${det.name} (Auto)`;
       } else {
-        btnText.innerText = 'Gemini API Key';
+        btnText.innerText = 'AI: Otomatis (Gratis/Ready)';
       }
     }
 
     function openApiKeyModal() {
       document.getElementById('inputApiKey').value = state.apiKey;
+      document.getElementById('inputBackupApiKey').value = state.backupApiKey;
+      document.getElementById('providerOverride').value = state.providerOverride;
+      document.getElementById('customBaseUrl').value = state.customBaseUrl;
+      onApiKeyInputChange();
       document.getElementById('apiKeyModal').classList.remove('hidden');
     }
 
@@ -559,18 +712,86 @@ Anda WAJIB membagi output menjadi TEPAT 2 BAGIAN UTAMA dengan pemisah judul head
       document.getElementById('apiKeyModal').classList.add('hidden');
     }
 
+    function clearApiKeys() {
+      state.apiKey = '';
+      state.backupApiKey = '';
+      state.providerOverride = 'auto';
+      state.customBaseUrl = '';
+      localStorage.removeItem('ai_primary_key');
+      localStorage.removeItem('gemini_api_key');
+      localStorage.removeItem('ai_backup_key');
+      localStorage.removeItem('ai_provider_override');
+      localStorage.removeItem('ai_custom_base_url');
+      document.getElementById('inputApiKey').value = '';
+      document.getElementById('inputBackupApiKey').value = '';
+      document.getElementById('providerOverride').value = 'auto';
+      document.getElementById('customBaseUrl').value = '';
+      onApiKeyInputChange();
+      updateApiKeyUI();
+      showToast('API Key dihapus. Beralih ke Mode Otomatis Bawaan.');
+    }
+
     function saveApiKey() {
-      const val = document.getElementById('inputApiKey').value.trim();
-      state.apiKey = val;
-      if (val) {
-        localStorage.setItem('gemini_api_key', val);
-        showToast('API Key pribadi berhasil disimpan');
-      } else {
-        localStorage.removeItem('gemini_api_key');
-        showToast('Menggunakan API Key bawaan sistem');
-      }
+      const k1 = document.getElementById('inputApiKey').value.trim();
+      const k2 = document.getElementById('inputBackupApiKey').value.trim();
+      const override = document.getElementById('providerOverride').value;
+      const baseUrl = document.getElementById('customBaseUrl').value.trim();
+
+      state.apiKey = k1;
+      state.backupApiKey = k2;
+      state.providerOverride = override;
+      state.customBaseUrl = baseUrl;
+
+      if (k1) localStorage.setItem('ai_primary_key', k1);
+      else localStorage.removeItem('ai_primary_key');
+
+      if (k2) localStorage.setItem('ai_backup_key', k2);
+      else localStorage.removeItem('ai_backup_key');
+
+      localStorage.setItem('ai_provider_override', override);
+      if (baseUrl) localStorage.setItem('ai_custom_base_url', baseUrl);
+      else localStorage.removeItem('ai_custom_base_url');
+
       updateApiKeyUI();
       closeApiKeyModal();
+      const det = detectProviderFromKey(k1);
+      showToast(k1 ? `Pengaturan AI disimpan (${det.name})` : 'Mode AI Otomatis diaktifkan');
+    }
+
+    // Handle Jenis Asesmen / Ujian dropdown changes (ABM & Lainnya Manual)
+    function handleJenisUjianChange() {
+      const val = document.getElementById('jenisUjian').value;
+      const manualWrap = document.getElementById('jenisUjianManualWrapper');
+      const abmBanner = document.getElementById('abmInfoBanner');
+
+      if (val === 'Lainnya') {
+        manualWrap.classList.remove('hidden');
+        document.getElementById('jenisUjianManual').focus();
+      } else {
+        manualWrap.classList.add('hidden');
+      }
+
+      if (val === 'ABM (Asesmen Bakat dan Minat)') {
+        abmBanner.classList.remove('hidden');
+        const mapelEl = document.getElementById('mapel');
+        const materiEl = document.getElementById('materi');
+        if (mapelEl.value === 'Biologi') {
+          mapelEl.value = 'Asesmen Bakat dan Minat (ABM)';
+          materiEl.value = 'Penalaran Verbal, Kuantitatif, Logis & Spasial';
+          document.getElementById('deskripsi').value = 'Mengukur potensi bakat kognitif peserta didik dalam penalaran verbal (analogi & silogisme), kuantitatif (pola bilangan & analisis data), serta pemecahan masalah logis.';
+        }
+      } else {
+        abmBanner.classList.add('hidden');
+      }
+    }
+
+    function getSelectedJenisUjian() {
+      const val = document.getElementById('jenisUjian').value;
+      if (val === 'Lainnya') {
+        const manualVal = document.getElementById('jenisUjianManual').value.trim();
+        return manualVal || 'Asesmen Khusus';
+      }
+      return val;
     }
 
     // Stepper counter control
@@ -596,6 +817,10 @@ Anda WAJIB membagi output menjadi TEPAT 2 BAGIAN UTAMA dengan pemisah judul head
       document.getElementById('kelas').value = '';
       document.getElementById('materi').value = '';
       document.getElementById('deskripsi').value = '';
+      document.getElementById('jenisUjian').value = 'Sumatif Akhir Semester (SAS)';
+      document.getElementById('jenisUjianManual').value = '';
+      handleJenisUjianChange();
+
       Object.keys(state.questionCounts).forEach(k => {
         state.questionCounts[k] = 0;
         document.getElementById(k).innerText = '0';
@@ -614,11 +839,11 @@ Anda WAJIB membagi output menjadi TEPAT 2 BAGIAN UTAMA dengan pemisah judul head
       document.getElementById('mapel').value = 'Biologi / Sains';
       document.getElementById('kelas').value = 'Kelas XI / Fase F';
       document.getElementById('kurikulum').value = 'Kurikulum Merdeka';
-      document.getElementById('jenisUjian').value = 'Sumatif Akhir Semester (SAS)';
+      document.getElementById('jenisUjian').value = 'Ulangan Harian / Formatif';
+      handleJenisUjianChange();
       document.getElementById('materi').value = 'Bioteknologi Modern & Rekayasa Genetika Organisme';
       document.getElementById('deskripsi').value = 'Siswa menganalisis efisiensi CRISPR-Cas9 dibandingkan metode konvensional dalam pembuatan tanaman tahan hama berdasarkan grafik data eksperimen lab.';
       
-      // Reset counters then set preset
       Object.keys(state.questionCounts).forEach(k => {
         state.questionCounts[k] = 0;
         document.getElementById(k).innerText = '0';
@@ -633,19 +858,173 @@ Anda WAJIB membagi output menjadi TEPAT 2 BAGIAN UTAMA dengan pemisah judul head
         document.getElementById(k).innerText = state.questionCounts[k];
       });
       updateTotalBadge();
-      showToast('Contoh preset Biologi HOTS berhasil dimuat');
+      showToast('Contoh preset Ulangan HOTS Biologi berhasil dimuat');
     }
 
-    // Main Generator function with Gemini API call
+    // Build Multi-Provider Execution Chain Automatically
+    function buildProviderChain() {
+      const chain = [];
+      const override = state.providerOverride;
+
+      const addCandidate = (providerId, key) => {
+        if (!providerId) return;
+        chain.push({ provider: providerId, apiKey: key || '' });
+      };
+
+      if (override !== 'auto') {
+        addCandidate(override, state.apiKey);
+        if (state.backupApiKey) {
+          addCandidate(detectProviderFromKey(state.backupApiKey).id, state.backupApiKey);
+        }
+        // Always append free fallback at the very end for resilience
+        if (override !== 'free_auto') addCandidate('free_auto', '');
+        return chain;
+      }
+
+      // Auto Mode:
+      // 1. Primary Key if provided
+      if (state.apiKey) {
+        const p1 = detectProviderFromKey(state.apiKey).id;
+        addCandidate(p1, state.apiKey);
+      }
+      // 2. Backup Key if provided
+      if (state.backupApiKey) {
+        const p2 = detectProviderFromKey(state.backupApiKey).id;
+        addCandidate(p2, state.backupApiKey);
+      }
+      // 3. Runtime Gemini Key (for embedded canvas / environment)
+      addCandidate('gemini_runtime', '');
+      // 4. Free Keyless Public Endpoint (for external hosting without API Key)
+      addCandidate('free_auto', '');
+
+      return chain;
+    }
+
+    // Call specific AI Provider
+    async function callProviderEndpoint(candidate, userQuery) {
+      const { provider, apiKey } = candidate;
+
+      if (provider === 'gemini' || provider === 'gemini_runtime') {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+        const payload = {
+          contents: [{ parts: [{ text: userQuery }] }],
+          systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] }
+        };
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) {
+          const errText = await res.text();
+          throw new Error(`Gemini HTTP ${res.status}: ${errText.slice(0, 120)}`);
+        }
+        const data = await res.json();
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (!text) throw new Error('Respons Gemini kosong');
+        return { text, usedLabel: apiKey ? 'Google Gemini' : 'Gemini Runtime' };
+      }
+
+      if (provider === 'anthropic') {
+        const res = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': apiKey,
+            'anthropic-version': '2023-06-01',
+            'anthropic-dangerous-direct-browser-access': 'true'
+          },
+          body: JSON.stringify({
+            model: 'claude-3-5-sonnet-latest',
+            max_tokens: 8192,
+            system: SYSTEM_INSTRUCTION,
+            messages: [{ role: 'user', content: userQuery }]
+          })
+        });
+        if (!res.ok) throw new Error(`Anthropic HTTP ${res.status}`);
+        const data = await res.json();
+        const text = data.content?.[0]?.text;
+        if (!text) throw new Error('Respons Claude kosong');
+        return { text, usedLabel: 'Anthropic Claude' };
+      }
+
+      // OpenAI-compatible providers: OpenAI, Groq, OpenRouter, xAI, Custom, Free Auto
+      let endpoint = 'https://api.openai.com/v1/chat/completions';
+      let model = 'gpt-4o-mini';
+      let label = 'OpenAI ChatGPT';
+      const headers = { 'Content-Type': 'application/json' };
+
+      if (provider === 'openai') {
+        endpoint = state.customBaseUrl || 'https://api.openai.com/v1/chat/completions';
+        model = 'gpt-4o-mini';
+        label = 'OpenAI ChatGPT';
+        headers['Authorization'] = `Bearer ${apiKey}`;
+      } else if (provider === 'groq') {
+        endpoint = 'https://api.groq.com/openai/v1/chat/completions';
+        model = 'llama-3.3-70b-versatile';
+        label = 'Groq Llama-3.3';
+        headers['Authorization'] = `Bearer ${apiKey}`;
+      } else if (provider === 'openrouter') {
+        endpoint = 'https://openrouter.ai/api/v1/chat/completions';
+        model = 'google/gemini-2.5-flash';
+        label = 'OpenRouter';
+        headers['Authorization'] = `Bearer ${apiKey}`;
+      } else if (provider === 'xai') {
+        endpoint = 'https://api.x.ai/v1/chat/completions';
+        model = 'grok-2-latest';
+        label = 'xAI Grok';
+        headers['Authorization'] = `Bearer ${apiKey}`;
+      } else if (provider === 'custom') {
+        endpoint = state.customBaseUrl || 'https://api.openai.com/v1/chat/completions';
+        model = 'gpt-4o-mini';
+        label = 'Custom AI Endpoint';
+        if (apiKey) headers['Authorization'] = `Bearer ${apiKey}`;
+      } else if (provider === 'free_auto') {
+        endpoint = 'https://text.pollinations.ai/openai';
+        model = 'openai';
+        label = 'AI Gratis Otomatis';
+      }
+
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+          model,
+          messages: [
+            { role: 'system', content: SYSTEM_INSTRUCTION },
+            { role: 'user', content: userQuery }
+          ],
+          temperature: 0.7
+        })
+      });
+
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(`${label} HTTP ${res.status}: ${errText.slice(0, 120)}`);
+      }
+      const data = await res.json();
+      const text = data.choices?.[0]?.message?.content;
+      if (!text) throw new Error(`Respons ${label} kosong`);
+      return { text, usedLabel: label };
+    }
+
+    // Main Generator function
     async function generateExam() {
       const mapel = document.getElementById('mapel').value.trim();
       const kelas = document.getElementById('kelas').value.trim();
       const kurikulum = document.getElementById('kurikulum').value;
-      const jenisUjian = document.getElementById('jenisUjian').value;
+      const jenisSelect = document.getElementById('jenisUjian').value;
+      const jenisUjian = getSelectedJenisUjian();
       const opsiPg = document.querySelector('input[name="opsiPg"]:checked').value;
       const materi = document.getElementById('materi').value.trim();
       const deskripsi = document.getElementById('deskripsi').value.trim();
       const totalSoal = getTotalQuestions();
+
+      if (jenisSelect === 'Lainnya' && !document.getElementById('jenisUjianManual').value.trim()) {
+        showToast('Harap isi nama Jenis Asesmen / Ujian manual!', true);
+        document.getElementById('jenisUjianManual').focus();
+        return;
+      }
 
       if (!mapel || !kelas || !materi) {
         showToast('Harap lengkapi Mata Pelajaran, Kelas, dan Bab Materi!', true);
@@ -657,7 +1036,6 @@ Anda WAJIB membagi output menjadi TEPAT 2 BAGIAN UTAMA dengan pemisah judul head
         return;
       }
 
-      // Build specific query summary for types
       const typesList = [];
       if (state.questionCounts.q_pg > 0) typesList.push(`${state.questionCounts.q_pg} soal Pilihan Ganda Biasa (${opsiPg})`);
       if (state.questionCounts.q_mcma > 0) typesList.push(`${state.questionCounts.q_mcma} soal PGK MCMA (Multiple Choice Multiple Answer)`);
@@ -665,25 +1043,31 @@ Anda WAJIB membagi output menjadi TEPAT 2 BAGIAN UTAMA dengan pemisah judul head
       if (state.questionCounts.q_sts > 0) typesList.push(`${state.questionCounts.q_sts} soal PGK Kategori Sesuai/Tidak Sesuai`);
       if (state.questionCounts.q_jodoh > 0) typesList.push(`${state.questionCounts.q_jodoh} soal Menjodohkan (Matching)`);
       if (state.questionCounts.q_isian > 0) typesList.push(`${state.questionCounts.q_isian} soal Isian Singkat`);
-      if (state.questionCounts.q_esai > 0) typesList.push(`${state.questionCounts.q_esai} soal Uraian (Esai Analytic)`);
+      if (state.questionCounts.q_esai > 0) typesList.push(`${state.questionCounts.q_esai} soal Uraian (Esai Analitik)`);
       if (state.questionCounts.q_urut > 0) typesList.push(`${state.questionCounts.q_urut} soal Mengurutkan (Kronologi/Proses)`);
       if (state.questionCounts.q_klasifikasi > 0) typesList.push(`${state.questionCounts.q_klasifikasi} soal Klasifikasi / Kategori`);
       if (state.questionCounts.q_sebab > 0) typesList.push(`${state.questionCounts.q_sebab} soal Sebab Akibat (Analisis Hubungan Pernyataan & Alasan)`);
 
-      const userQuery = `Tolong buatkan instrumen soal ujian HOTS lengkap dengan kriteria sebagai berikut:
-- Mata Pelajaran: ${mapel}
+      const userQuery = `Tolong buatkan perangkat asesmen lengkap (Naskah Soal, Kunci & Pembahasan, Kisi-Kisi Soal, dan Distribusi Soal) dengan kriteria berikut:
+- Mata Pelajaran / Subtes: ${mapel}
 - Kelas / Jenjang: ${kelas}
 - Kurikulum: ${kurikulum}
-- Jenis Ujian: ${jenisUjian}
+- Jenis Asesmen / Ujian: ${jenisUjian}
 - Opsi Pilihan Ganda: ${opsiPg}
 - Bab / Materi Pokok: ${materi}
 - Fokus Tujuan Pembelajaran / Konteks: ${deskripsi || 'Sesuai indikator asesmen HOTS akademis'}
 
 Rincian Jumlah & Bentuk Soal (Total ${totalSoal} Soal):
-${typesList.map((t, idx) => ` ${idx + 1}. ${t}`).join('\n')}
+${typesList.map((t, idx) => ` ${idx + 1}. ${t}`).join('
+')}
 
-Pastikan setiap nomor didahului STIMULUS kontekstual bertipe HOTS (narasi studi kasus, data eksperimen/tabel, atau skenario visual dalam kurung siku). 
-WAJIB pisahkan output secara persis menggunakan heading '## BAGIAN 1: NASKAH SOAL UJIAN' dan '## BAGIAN 2: KUNCI JAWABAN DAN PEMBAHASAN'.`;
+INSTRUKSI WAJIB:
+1. Setiap nomor soal wajib didahului STIMULUS kontekstual (narasi studi kasus, data eksperimen/tabel, atau deskripsi visual dalam tanda kurung siku).
+2. WAJIB pisahkan output menjadi 4 bagian persis dengan heading Markdown berikut:
+   - '## BAGIAN 1: NASKAH SOAL UJIAN'
+   - '## BAGIAN 2: KUNCI JAWABAN DAN PEMBAHASAN'
+   - '## BAGIAN 3: KISI-KISI PENULISAN SOAL' (wajib tabel Markdown lengkap dengan kolom: No. | Capaian / Tujuan Pembelajaran | Materi / Sub-Materi | Indikator Soal | Level Kognitif | Bentuk Soal | Nomor Soal)
+   - '## BAGIAN 4: DISTRIBUSI SEBARAN SOAL' (wajib 2 tabel rekapitulasi: distribusi berdasarkan Materi & Level Kognitif C1-C6, serta distribusi berdasarkan Bentuk Soal & Nomor Soal).`;
 
       // Show Loading UI
       document.getElementById('emptyState').classList.add('hidden');
@@ -694,33 +1078,34 @@ WAJIB pisahkan output secara persis menggunakan heading '## BAGIAN 1: NASKAH SOA
       btnGen.disabled = true;
       btnGen.classList.add('opacity-50', 'cursor-not-allowed');
 
+      const chain = buildProviderChain();
+      let successResult = null;
+      let lastError = null;
+
       try {
-        const apiKey = state.apiKey || "";
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-
-        const payload = {
-          contents: [{ parts: [{ text: userQuery }] }],
-          systemInstruction: {
-            parts: [{ text: SYSTEM_INSTRUCTION }]
+        for (let i = 0; i < chain.length; i++) {
+          const candidate = chain[i];
+          document.getElementById('loadingSubtitle').innerText =
+            `Menghubungkan ke mesin AI (${candidate.provider.replace('_', ' ').toUpperCase()})...`;
+          try {
+            successResult = await callProviderEndpoint(candidate, userQuery);
+            if (successResult && successResult.text) break;
+          } catch (e) {
+            console.warn(`Provider ${candidate.provider} gagal, mencoba fallback berikutnya:`, e);
+            lastError = e;
           }
-        };
-
-        // Call fetch with basic exponential backoff
-        let response = await fetchWithRetry(apiUrl, payload);
-        let result = await response.json();
-
-        const candidateText = result.candidates?.[0]?.content?.parts?.[0]?.text;
-
-        if (!candidateText) {
-          throw new Error('Gagal menerima teks balasan dari Gemini API.');
         }
 
-        state.rawResponse = candidateText;
-        parseAndRenderOutput(candidateText, { mapel, kelas, kurikulum, jenisUjian, materi });
+        if (!successResult) {
+          throw lastError || new Error('Semua mesin AI gagal merespons. Periksa koneksi internet atau API Key Anda.');
+        }
 
-        // Enable Export Toolbar
+        state.rawResponse = successResult.text;
+        state.lastMeta = { mapel, kelas, kurikulum, jenisUjian, materi, totalSoal };
+        parseAndRenderOutput(successResult.text, state.lastMeta);
+
         enableExportButtons(true);
-        showToast('Instrumen Soal HOTS berhasil dibuat!');
+        showToast(`Berhasil dibuat menggunakan ${successResult.usedLabel}!`);
 
       } catch (err) {
         console.error(err);
@@ -733,85 +1118,129 @@ WAJIB pisahkan output secara persis menggunakan heading '## BAGIAN 1: NASKAH SOA
       }
     }
 
-    // Helper for Exponential Backoff Fetch
-    async function fetchWithRetry(url, payload, retries = 3, delay = 1000) {
-      for (let i = 0; i < retries; i++) {
-        try {
-          const res = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-          if (res.ok) return res;
-        } catch (e) {
-          if (i === retries - 1) throw e;
-        }
-        await new Promise(r => setTimeout(r, delay * Math.pow(2, i)));
-      }
-      return fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-    }
-
-    // Split Markdown into Part 1 and Part 2
+    // Parse 4 Markdown sections reliably
     function parseAndRenderOutput(rawText, meta) {
-      // Update Kop Ujian Metadata
       document.getElementById('kopMapel').innerText = meta.mapel;
       document.getElementById('kopKelas').innerText = meta.kelas;
       document.getElementById('kopKurikulum').innerText = `${meta.kurikulum} • ${meta.jenisUjian}`;
       document.getElementById('kopJenis').innerText = meta.jenisUjian;
       document.getElementById('kopMateri').innerText = meta.materi;
+      document.getElementById('kopJumlah').innerText = `${meta.totalSoal} Butir Soal`;
 
-      // Extract parts by header standard
-      const part2Marker = "## BAGIAN 2: KUNCI JAWABAN DAN PEMBAHASAN";
-      const splitIndex = rawText.indexOf(part2Marker);
+      // Regex markers for Bagian 1, 2, 3, 4
+      const idx2 = rawText.search(/##\s*BAGIAN\s*2/i);
+      const idx3 = rawText.search(/##\s*BAGIAN\s*3/i);
+      const idx4 = rawText.search(/##\s*BAGIAN\s*4/i);
 
-      if (splitIndex !== -1) {
-        state.part1Text = rawText.substring(0, splitIndex).trim();
-        state.part2Text = rawText.substring(splitIndex).trim();
+      if (idx2 !== -1) {
+        state.part1Text = rawText.substring(0, idx2).trim();
+        if (idx3 !== -1) {
+          state.part2Text = rawText.substring(idx2, idx3).trim();
+          if (idx4 !== -1) {
+            state.part3Text = rawText.substring(idx3, idx4).trim();
+            state.part4Text = rawText.substring(idx4).trim();
+          } else {
+            state.part3Text = rawText.substring(idx3).trim();
+            state.part4Text = buildFallbackDistribusiMarkdown(meta);
+          }
+        } else {
+          state.part2Text = rawText.substring(idx2).trim();
+          state.part3Text = "## BAGIAN 3: KISI-KISI PENULISAN SOAL
+
+*Kisi-kisi terintegrasi pada naskah utama.*";
+          state.part4Text = buildFallbackDistribusiMarkdown(meta);
+        }
       } else {
-        // Fallback if header modified slightly by model
         state.part1Text = rawText;
-        state.part2Text = "### Kunci Jawaban & Pembahasan\n(Kunci jawaban menyatu pada naskah utama).";
+        state.part2Text = "## BAGIAN 2: KUNCI JAWABAN DAN PEMBAHASAN
+
+*Kunci jawaban menyatu pada naskah utama.*";
+        state.part3Text = "## BAGIAN 3: KISI-KISI PENULISAN SOAL
+
+*Silakan lihat tab Lengkap.*";
+        state.part4Text = buildFallbackDistribusiMarkdown(meta);
       }
 
-      // Hide loading, show content
       document.getElementById('loadingState').classList.add('hidden');
       document.getElementById('outputContent').classList.remove('hidden');
 
-      // Default to Tab 1
       switchTab('tab1');
+    }
+
+    // Fallback Distribution Table if model omits Bagian 4
+    function buildFallbackDistribusiMarkdown(meta) {
+      const total = meta.totalSoal || 1;
+      const rows = [];
+      let no = 1;
+      let startNum = 1;
+      const mapNames = [
+        ['q_pg', 'Pilihan Ganda Biasa'],
+        ['q_mcma', 'PGK MCMA (Jawaban Jamak)'],
+        ['q_bs', 'PGK Kategori Benar/Salah'],
+        ['q_sts', 'PGK Kategori Sesuai/Tidak Sesuai'],
+        ['q_jodoh', 'Menjodohkan'],
+        ['q_isian', 'Isian Singkat'],
+        ['q_esai', 'Uraian (Esai)'],
+        ['q_urut', 'Mengurutkan Kronologi/Proses'],
+        ['q_klasifikasi', 'Klasifikasi / Kategori'],
+        ['q_sebab', 'Sebab Akibat']
+      ];
+      mapNames.forEach(([key, label]) => {
+        const count = state.questionCounts[key] || 0;
+        if (count > 0) {
+          const endNum = startNum + count - 1;
+          const rangeStr = startNum === endNum ? `${startNum}` : `${startNum} – ${endNum}`;
+          const pct = ((count / total) * 100).toFixed(1);
+          rows.push(`| ${no++} | ${label} | ${rangeStr} | ${count} | ${pct}% |`);
+          startNum = endNum + 1;
+        }
+      });
+
+      return `## BAGIAN 4: DISTRIBUSI SEBARAN SOAL
+
+### Rekapitulasi Distribusi Berdasarkan Bentuk Soal
+| No. | Bentuk Soal | Nomor Soal | Jumlah Soal | Persentase (%) |
+| :--- | :--- | :---: | :---: | :---: |
+${rows.join('
+')}
+| **-** | **TOTAL KESELURUHAN** | **1 – ${total}** | **${total}** | **100%** |`;
     }
 
     // Tab Navigation Switcher
     function switchTab(tabName) {
       state.activeTab = tabName;
       const targetDiv = document.getElementById('renderedText');
+      const kopTitle = document.getElementById('kopUjianTitle');
 
-      // Update Tab Styles
-      ['tab1', 'tab2', 'tab3'].forEach(t => {
+      ['tab1', 'tab2', 'tab3', 'tab4', 'tab5'].forEach(t => {
         const btn = document.getElementById(`btn${t.charAt(0).toUpperCase() + t.slice(1)}`);
         if (t === tabName) {
-          btn.className = 'px-3 py-1.5 text-xs font-semibold rounded-md transition text-blue-700 bg-white shadow-sm';
+          btn.className = 'px-2.5 py-1.5 text-xs font-semibold rounded-md transition text-blue-700 bg-white shadow-sm';
         } else {
-          btn.className = 'px-3 py-1.5 text-xs font-semibold rounded-md transition text-slate-600 hover:text-slate-900';
+          btn.className = 'px-2.5 py-1.5 text-xs font-semibold rounded-md transition text-slate-600 hover:text-slate-900';
         }
       });
 
-      // Render Marked Content based on tab
       if (tabName === 'tab1') {
+        kopTitle.innerText = 'NASKAH SOAL UJIAN / ASESMEN';
         targetDiv.innerHTML = marked.parse(state.part1Text);
       } else if (tabName === 'tab2') {
+        kopTitle.innerText = 'KUNCI JAWABAN & PEDOMAN PENSKORAN';
         targetDiv.innerHTML = marked.parse(state.part2Text);
+      } else if (tabName === 'tab3') {
+        kopTitle.innerText = 'KISI-KISI PENULISAN SOAL';
+        targetDiv.innerHTML = marked.parse(state.part3Text);
+      } else if (tabName === 'tab4') {
+        kopTitle.innerText = 'DISTRIBUSI SEBARAN SOAL';
+        targetDiv.innerHTML = marked.parse(state.part4Text);
       } else {
+        kopTitle.innerText = 'PERANGKAT ASESMEN LENGKAP (SOAL, KUNCI, KISI-KISI & DISTRIBUSI)';
         targetDiv.innerHTML = marked.parse(state.rawResponse);
       }
     }
 
     function enableExportButtons(enable) {
-      const btns = ['btnExportWord', 'btnPrint', 'btnCopy'];
+      const btns = ['btnExportWord', 'btnExportKisiWord', 'btnExportKisiExcel', 'btnPrint', 'btnCopy'];
       btns.forEach(id => {
         const el = document.getElementById(id);
         if (enable) {
@@ -824,43 +1253,158 @@ WAJIB pisahkan output secara persis menggunakan heading '## BAGIAN 1: NASKAH SOA
       });
     }
 
-    // Export to MS Word (.doc) with full Kop Ujian & styling
-    function exportWord() {
+    // Export to MS Word (.doc) - supports 'naskah' or 'kisikisi'
+    function exportWord(mode = 'naskah') {
       if (!state.rawResponse) return;
 
-      const mapel = document.getElementById('mapel').value || 'Ujian';
-      const contentHtml = document.getElementById('printableArea').innerHTML;
-      
-      const header = `<html xmlns:o='urn:schemas-microsoft-com:office:office' 
-                            xmlns:w='urn:schemas-microsoft-com:office:word' 
-                            xmlns='http://www.w3.org/TR/REC-html40'>
-                      <head><meta charset='utf-8'><title>Naskah Soal Ujian</title>
-                      <style>
-                        body { font-family: 'Calibri', 'Times New Roman', serif; font-size: 11pt; line-height: 1.5; color: #000; }
-                        h1, h2, h3 { color: #1e3a8a; font-family: 'Arial', sans-serif; }
-                        table { border-collapse: collapse; width: 100%; margin: 12pt 0; }
-                        th, td { border: 1px solid #000; padding: 6pt; text-align: left; }
-                        th { background-color: #f2f2f2; }
-                        blockquote { border-left: 3pt solid #2563eb; padding-left: 8pt; background: #f8fafc; font-style: italic; }
-                      </style>
-                      </head><body>`;
-      const footer = "</body></html>";
-      const sourceHTML = header + contentHtml + footer;
+      const meta = state.lastMeta || {
+        mapel: document.getElementById('mapel').value || 'Ujian',
+        kelas: document.getElementById('kelas').value || '-',
+        kurikulum: document.getElementById('kurikulum').value || '-',
+        jenisUjian: getSelectedJenisUjian(),
+        materi: document.getElementById('materi').value || '-',
+        totalSoal: getTotalQuestions()
+      };
 
-      const blob = new Blob(['\ufeff', sourceHTML], {
-        type: 'application/msword'
-      });
+      const isKisi = mode === 'kisikisi';
+      const docTitle = isKisi ? 'KISI-KISI & DISTRIBUSI PENULISAN SOAL' : 'NASKAH SOAL & PEMBAHASAN UJIAN';
+      const mdBody = isKisi
+        ? `${state.part3Text}
 
+<br clear="all" style="page-break-before:always" />
+
+${state.part4Text}`
+        : `${state.part1Text}
+
+<br clear="all" style="page-break-before:always" />
+
+${state.part2Text}`;
+
+      const renderedBody = marked.parse(mdBody);
+      const pageOrientation = isKisi ? '@page { size: A4 landscape; margin: 1.5cm; }' : '@page { size: A4 portrait; margin: 2cm; }';
+
+      const signatureBlock = isKisi ? `
+        <br><br>
+        <table style="width:100%; border:none; margin-top:24pt;">
+          <tr style="border:none;">
+            <td style="width:50%; border:none; text-align:center;">
+              Mengetahui,<br>Kepala Sekolah / Ketua Program Studi<br><br><br><br>
+              <strong>( .................................................... )</strong><br>
+              NIP / NIDN. ....................................
+            </td>
+            <td style="width:50%; border:none; text-align:center;">
+              ................, ........................ 2026<br>Guru Mata Pelajaran / Penyusun Soal<br><br><br><br>
+              <strong>( .................................................... )</strong><br>
+              NIP / NIDN. ....................................
+            </td>
+          </tr>
+        </table>` : '';
+
+      const sourceHTML = `
+        <html xmlns:o='urn:schemas-microsoft-com:office:office' 
+              xmlns:w='urn:schemas-microsoft-com:office:word' 
+              xmlns='http://www.w3.org/TR/REC-html40'>
+        <head><meta charset='utf-8'><title>${docTitle}</title>
+        <style>
+          ${pageOrientation}
+          body { font-family: 'Calibri', 'Times New Roman', serif; font-size: 11pt; line-height: 1.45; color: #000; }
+          h1, h2, h3 { color: #1e3a8a; font-family: 'Arial', sans-serif; }
+          table { border-collapse: collapse; width: 100%; margin: 10pt 0; font-size: 10pt; }
+          th, td { border: 1px solid #000; padding: 5pt 7pt; text-align: left; vertical-align: top; }
+          th { background-color: #e2e8f0; font-weight: bold; text-align: center; }
+          blockquote { border-left: 3pt solid #2563eb; padding-left: 8pt; background: #f8fafc; font-style: italic; }
+          .kop { text-align: center; border-bottom: 3pt double #000; padding-bottom: 8pt; margin-bottom: 12pt; }
+          .meta-table td { border: none; padding: 2pt 4pt; font-size: 10.5pt; }
+        </style>
+        </head><body>
+          <div class="kop">
+            <div style="font-size:13pt; font-weight:bold; text-transform:uppercase;">${docTitle}</div>
+            <div style="font-size:11pt; font-weight:bold; color:#1e3a8a;">${meta.jenisUjian.toUpperCase()}</div>
+            <div style="font-size:9.5pt; color:#475569;">${meta.kurikulum} • Tahun Ajaran 2026/2027</div>
+          </div>
+          <table class="meta-table">
+            <tr>
+              <td style="width:18%;"><strong>Mata Pelajaran</strong></td><td style="width:32%;">: ${meta.mapel}</td>
+              <td style="width:18%;"><strong>Jenis Asesmen</strong></td><td style="width:32%;">: ${meta.jenisUjian}</td>
+            </tr>
+            <tr>
+              <td><strong>Kelas / Jenjang</strong></td><td>: ${meta.kelas}</td>
+              <td><strong>Jumlah Soal</strong></td><td>: ${meta.totalSoal} Butir Soal</td>
+            </tr>
+            <tr>
+              <td><strong>Materi Pokok</strong></td><td colspan="3">: ${meta.materi}</td>
+            </tr>
+          </table>
+          <hr style="border:0.5pt solid #94a3b8; margin-bottom:12pt;">
+          ${renderedBody}
+          ${signatureBlock}
+        </body></html>`;
+
+      const blob = new Blob(['﻿', sourceHTML], { type: 'application/msword' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `Naskah_Soal_HOTS_${mapel.replace(/\s+/g, '_')}.doc`;
+      const prefix = isKisi ? 'Kisi_Kisi_dan_Distribusi' : 'Naskah_Soal_dan_Kunci';
+      a.download = `${prefix}_${meta.mapel.replace(/\s+/g, '_')}.doc`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
 
-      showToast('Dokumen Word (.doc) berhasil diunduh!');
+      showToast(`File Word ${isKisi ? 'Kisi-Kisi & Distribusi' : 'Naskah Soal'} berhasil diunduh!`);
+    }
+
+    // Export Kisi-Kisi & Distribusi to Excel (.xls)
+    function exportExcelKisiKisi() {
+      if (!state.rawResponse) return;
+
+      const meta = state.lastMeta || {
+        mapel: document.getElementById('mapel').value || 'Ujian',
+        kelas: document.getElementById('kelas').value || '-',
+        kurikulum: document.getElementById('kurikulum').value || '-',
+        jenisUjian: getSelectedJenisUjian(),
+        materi: document.getElementById('materi').value || '-',
+        totalSoal: getTotalQuestions()
+      };
+
+      const kisiHtml = marked.parse(state.part3Text);
+      const distHtml = marked.parse(state.part4Text);
+
+      const excelTemplate = `
+        <html xmlns:o="urn:schemas-microsoft-com:office:office"
+              xmlns:x="urn:schemas-microsoft-com:office:excel"
+              xmlns="http://www.w3.org/TR/REC-html40">
+        <head><meta charset="utf-8">
+        <style>
+          body { font-family: Calibri, Arial, sans-serif; font-size: 11pt; }
+          h2, h3 { color: #1e3a8a; }
+          table { border-collapse: collapse; width: 100%; margin-bottom: 16pt; }
+          th, td { border: 1px solid #000000; padding: 6px 8px; vertical-align: top; }
+          th { background-color: #dbeafe; font-weight: bold; text-align: center; }
+        </style>
+        </head><body>
+          <h2>KISI-KISI & DISTRIBUSI PENULISAN SOAL</h2>
+          <table>
+            <tr><td><strong>Mata Pelajaran</strong></td><td>${meta.mapel}</td><td><strong>Jenis Asesmen</strong></td><td>${meta.jenisUjian}</td></tr>
+            <tr><td><strong>Kelas / Jenjang</strong></td><td>${meta.kelas}</td><td><strong>Kurikulum</strong></td><td>${meta.kurikulum}</td></tr>
+            <tr><td><strong>Materi Pokok</strong></td><td colspan="3">${meta.materi} (Total: ${meta.totalSoal} Soal)</td></tr>
+          </table>
+          ${kisiHtml}
+          <br>
+          ${distHtml}
+        </body></html>`;
+
+      const blob = new Blob(['﻿', excelTemplate], { type: 'application/vnd.ms-excel' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Kisi_Kisi_Distribusi_${meta.mapel.replace(/\s+/g, '_')}.xls`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      showToast('File Excel Kisi-Kisi & Distribusi (.xls) berhasil diunduh!');
     }
 
     // Trigger Print View
@@ -874,11 +1418,12 @@ WAJIB pisahkan output secara persis menggunakan heading '## BAGIAN 1: NASKAH SOA
       let textToCopy = '';
       if (state.activeTab === 'tab1') textToCopy = state.part1Text;
       else if (state.activeTab === 'tab2') textToCopy = state.part2Text;
+      else if (state.activeTab === 'tab3') textToCopy = state.part3Text;
+      else if (state.activeTab === 'tab4') textToCopy = state.part4Text;
       else textToCopy = state.rawResponse;
 
       if (!textToCopy) return;
 
-      // Use document.execCommand fallback as safety inside frames
       const textarea = document.createElement('textarea');
       textarea.value = textToCopy;
       textarea.style.position = 'fixed';
@@ -888,7 +1433,7 @@ WAJIB pisahkan output secara persis menggunakan heading '## BAGIAN 1: NASKAH SOA
       
       try {
         document.execCommand('copy');
-        showToast('Teks markdown berhasil disalin ke clipboard!');
+        showToast('Teks berhasil disalin ke clipboard!');
       } catch (err) {
         showToast('Gagal menyalin teks.', true);
       } finally {
@@ -915,7 +1460,7 @@ WAJIB pisahkan output secara persis menggunakan heading '## BAGIAN 1: NASKAH SOA
       setTimeout(() => {
         toast.classList.add('translate-y-2');
         setTimeout(() => toast.classList.add('hidden'), 200);
-      }, 3000);
+      }, 3200);
     }
   </script>
 
